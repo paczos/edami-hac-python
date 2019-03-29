@@ -1,2 +1,2 @@
-# edami-hac-k-means-impl-and-comp
+# Data mining, Clustering algorithm implementation and comparison: k-means and HAC
 
