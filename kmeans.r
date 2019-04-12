@@ -1,43 +1,58 @@
 library("tidyverse")
 
 dist <- function(a, b){
+#    print(paste(a, b, sqrt(sum((a - b) ^ 2))))
     sqrt(sum((a - b) ^ 2))
 }
 
 kmeans <- function(data, groupcount)
 {
     # using random points from datasets as initial positions for centroids
-    data$clusterId <- 0;
 
-    centroids <- data[sample(nrow(data), groupcount),]
+    centroids <- data[sample(nrow(data), groupcount),];
+    clusterIds <- integer(nrow(data));
 
     while (TRUE) {
 
-        modifiedCluster = FALSE
+        modifiedCluster = 0
         # calculate clusters by finding closest centroid for each point
         for (i in 1 : nrow(data)) {
             row <- data[i,];
             distances <- apply(centroids, 1, function(c){
-                # TODO remove columns with clusterId before calculating dist
                 dist(c, row)
             })
 
             # store closest centroid
+            #print(distances)
             newClusterId = which.min(distances);
-            if (row$clusterId != newClusterId) {
-                data[i,]$clusterId <- newClusterId;
-                modifiedCluster <- TRUE
+            #print(distances)
+            #print(paste(clusterIds[i], newClusterId));
+
+            #Error in if (clusterIds[i] != newClusterId) { :
+            # argument is of length zero
+
+            if (clusterIds[i] != newClusterId) {
+                clusterIds[i] <- newClusterId;
+                modifiedCluster = modifiedCluster + 1 ;
             }
         }
 
-        if (modifiedCluster == FALSE)
+        if (modifiedCluster < 2)
         {
             # if we got here, no item was moved between clusters -> the algorithm had converged
             break
         }
+        else {
+            print(paste("modified ", modifiedCluster))
+        }
 
-        # TODO calculate new centroids
+        # calculate new centroids
+        for (i in 1 : nrow(centroids)) {
+            clusterItems = data[clusterIds == i, 1 : (ncol(data) - 1)];
+            centroids[i] = colMeans(clusterItems);
+        }
     }
-    print(data)
+    data$clusterId = clusterIds;
+    data
 }
 
