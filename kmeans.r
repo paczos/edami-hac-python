@@ -1,7 +1,7 @@
 library("tidyverse")
 
 dist <- function(a, b){
-#    print(paste(a, b, sqrt(sum((a - b) ^ 2))))
+    #    print(paste(a, b, sqrt(sum((a - b) ^ 2))))
     sqrt(sum((a - b) ^ 2))
 }
 
@@ -48,8 +48,8 @@ kmeans <- function(data, groupcount)
 
         # calculate new centroids
         for (i in 1 : nrow(centroids)) {
-            clusterItems = data[clusterIds == i, 1 : (ncol(data) - 1)];
-            centroids[i] = colMeans(clusterItems);
+            clusterItems = data[clusterIds == i,];
+            centroids[i, ] = colMeans(clusterItems);
         }
     }
     data$clusterId = clusterIds;
