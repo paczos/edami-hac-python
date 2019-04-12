@@ -1,7 +1,9 @@
- #install.packages("cluster.datasets")
+#install.packages("cluster.datasets")
 
- library("cluster.datasets")
- library("datasets")
+library("cluster.datasets")
+library("datasets")
+library("tidyverse")
 
- summary(iris)
- head(iris)
+source("kmeans.r")
+
+kmeans(iris %>% select(1 : 4), 3)
