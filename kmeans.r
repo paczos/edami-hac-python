@@ -32,12 +32,11 @@ kmeans <- function(data, groupcount)
 
         if (modifiedCluster == FALSE)
         {
+            # if we got here, no item was moved between clusters -> the algorithm had converged
             break
         }
 
         # TODO calculate new centroids
-
-
     }
     print(data)
 }
