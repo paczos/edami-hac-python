@@ -8,7 +8,6 @@ source("kmeans.r")
 source("hac.r")
 
 colnames(iris)
-data.noLabels = iris %>% select(1 : 4)
-
-kmeans(data.noLabels, 3)
-hac(data.noLabels)
+data.noLabels = na.omit(iris %>% select(1 : 4))
+hac(data.noLabels[c(1 : 10),])
+kmeans(data.noLabels[c(1 : 10),], 3)
