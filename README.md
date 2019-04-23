@@ -12,6 +12,9 @@ Hierarchical agglomerative clustering does not create flat partitioning of data 
   
 
 # Assumptions and testing data
+The two algorithms were implemented in R language. This is a dynamic scripting language used mainly for data-science applications. It's strengths lie in wide range of libraries of utilities for data manipulation, data mining and statistics. 
+R built-in data-structures are flat and there is no simple notion of a `reference` so in case of HAC implementation, it was necessary to come up with flat representation of a hierarchical results of the algorithm.
+For testing purposes, builtin R dataset Iris was used. Data contains 4 dimensional samples describing flowers' Sepals and Petals with label to which species it belongs.
 
 # Implementation
 ## K-MEANS
