@@ -18,10 +18,12 @@ For testing purposes, builtin R dataset Iris was used. Data contains 4 dimension
 
 # Implementation
 ## K-MEANS
+Centroid-based variant of k-means algorithm was implemented. As the input unlabelled data frame containing data-points in which row is supplied. The algorithm adds new column to the data-frame: `cluster` which stores results of clustering operation.  
 ### Algorithm
 ### Input
 ### Output
 ### Performance
+
     
 ## HAC
 ### Algorithm
