@@ -17,19 +17,35 @@ R built-in data-structures are flat and there is no simple notion of a `referenc
 For testing purposes, builtin R dataset Iris was used. Data contains 4 dimensional samples describing flowers' Sepals and Petals with label to which species it belongs.
 
 # Implementation
-## K-MEANS
-Centroid-based variant of k-means algorithm was implemented. As the input unlabelled data frame containing data-points in which row is supplied. The algorithm adds new column to the data-frame: `cluster` which stores results of clustering operation.  
+## K-MEANS  
+
 ### Algorithm
+Centroid-based variant of k-means algorithm was implemented. Distance between points is calculated using simple Euclidean distance. 
+
 ### Input
+As the input unlabelled data-frame containing data-points in which row is supplied. 
+
 ### Output
+The algorithm adds new column to the data-frame: `cluster` which stores results of clustering operation.
+
 ### Performance
+
 
     
 ## HAC
+
 ### Algorithm
+Algorithm creating complete `dendrogram` of clusters was implemented. Each cluster candidate is represented as a centroid of all points belonging to it. 
+The `agglomerative` adjective in the context of hierarchical clustering means that the clustering is performed in a bottom-up way. First we create smaller clusters and then decide how they should be merged to create higher-order clusters containg them.  
+
 ### Input
+As the input unlabelled data-frame containing data-points in which row is supplied. 
 
 ### Output
+The algorithm returns a data-frame containing flat representation of a dendrogram. This allows to interpret how the merging of clusters was performed. Each entry in `data` is smallest index number of a row in original data representing cluster.
+ 
+It would be possible to retrieve the full tree structure from this form in O(n) time.
+
 ### Performance
 
 ## Comparison
