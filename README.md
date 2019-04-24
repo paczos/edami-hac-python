@@ -31,6 +31,11 @@ The algorithm adds new column to the data-frame: `cluster` which stores results 
 ### Performance
 
 
+ ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot003.png)
+ 
+ 
+  ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot004.png)
+
     
 ## HAC
 
@@ -48,6 +53,12 @@ It would be possible to retrieve the full tree structure from this form in O(n) 
 
 ### Performance
 
+ |expr|min|lq|mean|median|uq|max|neval|
+ |---|---|---|---|---|---|---|---|
+ |hac(data.noLabels[c(1:10), ])| 114.3293| 165.0287| 173.7432| 169.8413| 179.6501|  280.5231 |  100|
+ ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot001.png)
+ 
+ ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot002.png)
 ## Comparison
 
 
