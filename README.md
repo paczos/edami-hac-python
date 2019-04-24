@@ -30,11 +30,25 @@ The algorithm adds new column to the data-frame: `cluster` which stores results 
 
 ### Performance
 
+ 
+
+ |expr|min|lq|mean|median|uq|max|neval|
+ |---|---|---|---|---|---|---|---|
+ |kmeans(data.noLabels[c(1:10), ], 3)| 31.47939| 35.11494 |50.56061|  47.73692 | 54.05549 |120.2285   |100|
+ |kmeans(data.noLabels[c(1:50), ], 3) | 202.6218| 332.7086 |452.3831| 434.7092| 529.3968| 1195.064|   100|
+ |kmeans(data.noLabels[c(1:10), ], 10)| 101.7517| 104.8609| 130.8737|  146.6242| 151.1198| 222.9607|   100|
+ |kmeans(data.noLabels[c(1:50), ], 10)| 515.5413| 1041.901| 1313.249| 1232.979| 1525.464| 2985.969|   100|
+
 
  ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot003.png)
  
  
   ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot004.png)
+  
+   ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot005.png)
+ 
+ 
+  ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot006.png)
 
     
 ## HAC
@@ -56,6 +70,8 @@ It would be possible to retrieve the full tree structure from this form in O(n) 
  |expr|min|lq|mean|median|uq|max|neval|
  |---|---|---|---|---|---|---|---|
  |hac(data.noLabels[c(1:10), ])| 114.3293| 165.0287| 173.7432| 169.8413| 179.6501|  280.5231 |  100|
+ |hac(data.noLabels[c(1:50), ])| 14548.5| 15986.98| 17727.52| 17795.09| 19017.74|
+
  ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot001.png)
  
  ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot002.png)
