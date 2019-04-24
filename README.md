@@ -35,6 +35,24 @@ As the input unlabelled data-frame containing data-points in which row is suppli
 
 ### Output
 The algorithm adds new column to the data-frame: `cluster` which stores results of clustering operation.
+ ```r
+kmeans(data.noLabels[c(1 : 10),], 3)
+```
+
+```
+   Sepal.Length Sepal.Width Petal.Length Petal.Width clusterId
+1           5.1         3.5          1.4         0.2         3
+2           4.9         3.0          1.4         0.2         1
+3           4.7         3.2          1.3         0.2         2
+4           4.6         3.1          1.5         0.2         2
+5           5.0         3.6          1.4         0.2         3
+6           5.4         3.9          1.7         0.4         3
+7           4.6         3.4          1.4         0.3         2
+8           5.0         3.4          1.5         0.2         3
+9           4.4         2.9          1.4         0.2         2
+10          4.9         3.1          1.5         0.1         1
+```
+
 
 ### Performance
 
@@ -68,13 +86,39 @@ The `agglomerative` adjective in the context of hierarchical clustering means th
 
 HAC is very unfriendly for the  R language. Everything in R is passed as a value, so even pushing to a data-frame requires copying lots of data. No straightforward concept of a reference made it harder to reason about hierarchical dependencies between clusters. 
 ### Initialization
-
+Each data-point is treated as a separate cluster candidate.
 ### Input
 As the input unlabelled data-frame containing data-points in which row is supplied. 
 
 ### Output
 The algorithm returns a data-frame containing flat representation of a dendrogram. This allows to interpret how the merging of clusters was performed. Each entry in `data` is smallest index number of a row in original data representing cluster.
  
+```r
+hac(data.noLabels[c(1 : 10),])
+```
+ 
+``` 
+    data cluster
+1     1       1
+2     5       1
+3     2       2
+4    10       2
+5     8       3
+6     1       3
+7     3       4
+8     4       4
+9     7       5
+10    3       5
+11    2       6
+12    3       6
+13    9       7
+14    2       7
+15    1       8
+16    2       8
+17    6       9
+18    1       9
+```
+
 It would be possible to retrieve the full tree structure from this form in `O(n)` time.
 
 ### Performance
@@ -94,7 +138,7 @@ The algorithm was ran 100 times using two different sizes of input data frame.
 # Comparison and summary
 Although both K-MEANS and HAC split data into clusters, they have different understanding of the shapes of their results. K-means assigns each data-point to a single cluster, whereas HAC creates hierarchy of nested sets. 
 Simple randomized heuristic allowed for implementation of k-means that finds reasonably good clustering quickly.
-That was not the case with HAC. In spite of outputting correct and complete results, it was painfully slow. Its base time complexity was `O(n^3)` but conceptual limitations of R made it drastically slower compared to theoretical speed. If one has to really use HAC in R language, then it is much more convenient to implement a C++ of this algorithm and use the builtin R interfacing mechanisms for calling external procedures written in a different language.
+That was not the case with HAC. In spite of outputting correct and complete results, it was painfully slow. Its base time complexity was `O(n^3)` but conceptual limitations of R made it drastically slower compared to theoretical speed. If one has to really use HAC in R language, then it is much more convenient to implement this algorithm in C++  and use the builtin R interfacing mechanisms for calling external procedures written in a different language.
 
 Which of these two algorithms one should choose depends on the task being solved. When one needs a flat partition of data-points into groups that are similar, then k-means is the way to go. On the other hand, if one is interested in finding structure in the data, then HAC should be used.     
 
