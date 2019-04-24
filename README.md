@@ -142,7 +142,4 @@ That was not the case with HAC. In spite of outputting correct and complete resu
 
 Which of these two algorithms one should choose depends on the task being solved. When one needs a flat partition of data-points into groups that are similar, then k-means is the way to go. On the other hand, if one is interested in finding structure in the data, then HAC should be used.     
 
-
-
-
-
+This project allowed me to get familiar with limitations of R language and to get used to the tabular way of thinking about data in this language. 
