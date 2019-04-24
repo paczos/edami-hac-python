@@ -2,7 +2,7 @@ dist <- function(a, b){
     sqrt(sum((a - b) ^ 2));
 }
 
-hac <- function (data, coohesion)
+hac <- function (data)
 {
     # initially: treating each point as a separate cluster
     # using centroids to assess distances between clusters
