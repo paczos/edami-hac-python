@@ -20,19 +20,37 @@ data.noLabels = na.omit(iris %>% select(1 : 4))
 hacBenchmark <- microbenchmark(
 hac(data.noLabels[c(1 : 10),])
 );
-print(hacBenchmark) #standard data frame of the output
-
+print(hacBenchmark)
 qplot(y = time, data = hacBenchmark, colour = expr)
+
+hacBenchmarkLarge <- microbenchmark(
+hac(data.noLabels[c(1 : 50),])
+);
+print(hacBenchmarkLarge)
+qplot(y = time, data = hacBenchmarkLarge, colour = expr)
+
 
 kmeans3Benchmark <- microbenchmark(
 kmeans(data.noLabels[c(1 : 10),], 3)
 );
-print(kmeans3Benchmark) #standard data frame of the output
+print(kmeans3Benchmark)
 qplot(y = time, data = kmeans3Benchmark, colour = expr)
+
+kmeans3BenchmarkLarge <- microbenchmark(
+kmeans(data.noLabels[c(1 : 50),], 3)
+);
+print(kmeans3BenchmarkLarge)
+qplot(y = time, data = kmeans3BenchmarkLarge, colour = expr)
 
 
 kmeans10Benchmark <- microbenchmark(
 kmeans(data.noLabels[c(1 : 10),], 10)
 );
-print(kmeans10Benchmark) #standard data frame of the output
+print(kmeans10Benchmark)
 qplot(y = time, data = kmeans10Benchmark, colour = expr)
+
+kmeans10BenchmarkLarge <- microbenchmark(
+kmeans(data.noLabels[c(1 : 50),], 10)
+);
+print(kmeans10BenchmarkLarge)
+qplot(y = time, data = kmeans10BenchmarkLarge, colour = expr)
