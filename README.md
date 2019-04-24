@@ -56,7 +56,7 @@ kmeans(data.noLabels[c(1 : 10),], 3)
 
 ### Performance
 
-The algorithm was ran 100 times using two different sizes of input data frame and different numbers of clusters.
+The algorithm was ran 100 times using two different sizes of input data frame and different numbers of clusters. In the table there are measurements of execution time in ms.
  
 
  |expr|min|lq|mean|median|uq|max|neval|
@@ -122,7 +122,7 @@ hac(data.noLabels[c(1 : 10),])
 It would be possible to retrieve the full tree structure from this form in `O(n)` time.
 
 ### Performance
-The algorithm was ran 100 times using two different sizes of input data frame.
+The algorithm was ran 100 times using two different sizes of input data frame. In the table there are measurements of execution time in ms.
 
  |expr|min|lq|mean|median|uq|max|neval|
  |---|---|---|---|---|---|---|---|
