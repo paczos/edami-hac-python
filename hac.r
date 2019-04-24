@@ -52,7 +52,7 @@ hac <- function (data)
         # remove merged  clusters from clusterCandidates
         clusterCandidates <- clusterCandidates[- c(fstIdx, sndIdx),];
 
-        newClusterId <- nrow(clusters) + 1;
+        newClusterId <- floor(nrow(clusters)/2) + 1;
 
         clusters <- rbind(clusters, list(data = fst$id, cluster = newClusterId));
         clusters <- rbind(clusters, list(data = snd$id, cluster = newClusterId));
