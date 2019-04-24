@@ -24,9 +24,15 @@ print(hacBenchmark) #standard data frame of the output
 
 qplot(y = time, data = hacBenchmark, colour = expr)
 
-kmeansBenchmark <- microbenchmark(
+kmeans3Benchmark <- microbenchmark(
 kmeans(data.noLabels[c(1 : 10),], 3)
 );
-print(kmeansBenchmark) #standard data frame of the output
-qplot(y = time, data = kmeansBenchmark, colour = expr)
+print(kmeans3Benchmark) #standard data frame of the output
+qplot(y = time, data = kmeans3Benchmark, colour = expr)
 
+
+kmeans10Benchmark <- microbenchmark(
+kmeans(data.noLabels[c(1 : 10),], 10)
+);
+print(kmeans10Benchmark) #standard data frame of the output
+qplot(y = time, data = kmeans10Benchmark, colour = expr)
