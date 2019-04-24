@@ -70,7 +70,9 @@ It would be possible to retrieve the full tree structure from this form in O(n) 
  |expr|min|lq|mean|median|uq|max|neval|
  |---|---|---|---|---|---|---|---|
  |hac(data.noLabels[c(1:10), ])| 114.3293| 165.0287| 173.7432| 169.8413| 179.6501|  280.5231 |  100|
- |hac(data.noLabels[c(1:50), ])| 14548.5| 15986.98| 17727.52| 17795.09| 19017.74|
+ |hac(data.noLabels[c(1:50), ])| 14548.5| 15986.98| 17727.52| 17795.09| 19017.74|  23047.62|   100|
+
+
 
  ![hac 10 data points](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/Rplot001.png)
  
