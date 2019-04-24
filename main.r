@@ -16,6 +16,8 @@ source("hac.r")
 colnames(iris)
 
 data.noLabels = na.omit(iris %>% select(1 : 4))
+print(kmeans(data.noLabels[c(1 : 10),], 3))
+print(hac(data.noLabels[c(1 : 10),]))
 
 hacBenchmark <- microbenchmark(
 hac(data.noLabels[c(1 : 10),])
