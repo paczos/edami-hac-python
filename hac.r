@@ -1,5 +1,5 @@
 dist <- function(a, b){
-    sqrt(sum((a - b) ^ 2))
+    sqrt(sum((a - b) ^ 2));
 }
 
 hac <- function (data, coohesion)
@@ -9,16 +9,16 @@ hac <- function (data, coohesion)
     # at each step linking clusters that are closest to each other
     colsWithDataCount <- ncol(data);
     ids <- as.integer(rownames(data));
-    data$id <- ids
-    data$size <- 1
+    data$id <- ids;
+    data$size <- 1;
 
     clusterCandidates <- data;
 
-    clusters <- data.frame(data = integer(), cluster = integer())
+    clusters <- data.frame(data = integer(), cluster = integer());
 
     while (nrow(clusterCandidates) > 1) {
 
-        print(paste("clusters", nrow(clusters)))
+        # print(paste("clusters", nrow(clusters)));
 
         # find closest pair
         s <- combn(1 : nrow(clusterCandidates), 2, function(pair){
@@ -27,7 +27,7 @@ hac <- function (data, coohesion)
             distance <- dist(clusterCandidates[fst, 1 : colsWithDataCount], clusterCandidates[snd, 1 : colsWithDataCount]);
             c(fst, snd, distance);
         });
-        minimalVecIdx <- which.min(s[3,])
+        minimalVecIdx <- which.min(s[3,]);
         fstIdx <- s[1, minimalVecIdx];
         sndIdx <- s[2, minimalVecIdx];
         distance <- s[3, minimalVecIdx];
@@ -36,11 +36,11 @@ hac <- function (data, coohesion)
         fst <- clusterCandidates[fstIdx,]
         snd <- clusterCandidates[sndIdx,]
 
-        fstData = fst[, 1 : colsWithDataCount]
-        sndData = snd[, 1 : colsWithDataCount]
-        fstClusterSize = fst$size
-        sndClusterSize = snd$size
-        print(paste(fstClusterSize, sndClusterSize))
+        fstData = fst[, 1 : colsWithDataCount];
+        sndData = snd[, 1 : colsWithDataCount];
+        fstClusterSize = fst$size;
+        sndClusterSize = snd$size;
+        # print(paste(fstClusterSize, sndClusterSize))
 
         centroidData <- (fstData * fstClusterSize + sndData * sndClusterSize) / (fstClusterSize + sndClusterSize);
         centroidId <- min(fst$id, snd$id);
@@ -52,11 +52,10 @@ hac <- function (data, coohesion)
         # remove merged  clusters from clusterCandidates
         clusterCandidates <- clusterCandidates[- c(fstIdx, sndIdx),];
 
-        print(clusterCandidates)
-        newClusterId <- nrow(clusters) + 1
+        newClusterId <- nrow(clusters) + 1;
 
         clusters <- rbind(clusters, list(data = fst$id, cluster = newClusterId));
-        clusters <- rbind(clusters, list(data = snd$id, cluster = newClusterId))
+        clusters <- rbind(clusters, list(data = snd$id, cluster = newClusterId));
     }
 
     clusters
