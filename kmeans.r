@@ -1,7 +1,7 @@
-library("tidyverse")
+library(tidyverse)
 
 dist <- function(a, b){
-    sqrt(sum((a - b) ^ 2))
+    sqrt(sum((a - b) ^ 2));
 }
 
 kmeans <- function(data, groupcount)
@@ -20,7 +20,7 @@ kmeans <- function(data, groupcount)
         for (i in 1 : nrow(data)) {
             row <- data[i,];
             distances <- apply(centroids, 1, function(c){
-                dist(c, row)
+                dist(c, row);
             })
 
             # store closest centroid
@@ -37,9 +37,9 @@ kmeans <- function(data, groupcount)
             # if we got here, less than convTh items were moved between clusters -> the algorithm had converged
             break
         }
-        else {
-            print(paste("modified ", modifiedClusterCount))
-        }
+        # else {
+        #    print(paste("modified ", modifiedClusterCount))
+        # }
 
         # calculate new centroids
         for (i in 1 : nrow(centroids)) {
