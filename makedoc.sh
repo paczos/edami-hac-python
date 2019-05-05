@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-
-pandoc -s  -o edami_report_ppaczuski.pdf README.md
+grip --export  README.md
+wkhtmltopdf README.html edami_report_ppaczuski.pdf
