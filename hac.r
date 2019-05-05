@@ -18,8 +18,6 @@ hac <- function (data)
 
     while (nrow(clusterCandidates) > 1) {
 
-        # print(paste("clusters", nrow(clusters)));
-
         # find closest pair
         s <- combn(1 : nrow(clusterCandidates), 2, function(pair){
             fst = pair[1];
@@ -40,7 +38,6 @@ hac <- function (data)
         sndData = snd[, 1 : colsWithDataCount];
         fstClusterSize = fst$size;
         sndClusterSize = snd$size;
-        # print(paste(fstClusterSize, sndClusterSize))
 
         centroidData <- (fstData * fstClusterSize + sndData * sndClusterSize) / (fstClusterSize + sndClusterSize);
         centroidId <- min(fst$id, snd$id);
@@ -49,10 +46,11 @@ hac <- function (data)
 
         # add new row to dataframe
         clusterCandidates <- rbind(clusterCandidates, centroidData);
+
         # remove merged  clusters from clusterCandidates
         clusterCandidates <- clusterCandidates[- c(fstIdx, sndIdx),];
 
-        newClusterId <- floor(nrow(clusters)/2) + 1;
+        newClusterId <- floor(nrow(clusters) / 2) + 1;
 
         clusters <- rbind(clusters, list(data = fst$id, cluster = newClusterId));
         clusters <- rbind(clusters, list(data = snd$id, cluster = newClusterId));
