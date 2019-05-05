@@ -37,9 +37,6 @@ kmeans <- function(data, groupcount)
             # if we got here, less than convTh items were moved between clusters -> the algorithm had converged
             break
         }
-        # else {
-        #    print(paste("modified ", modifiedClusterCount))
-        # }
 
         # calculate new centroids
         for (i in 1 : nrow(centroids)) {
