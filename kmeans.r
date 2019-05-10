@@ -1,10 +1,10 @@
 library(tidyverse)
 
-dist <- function(a, b){
+euclid <- function(a, b){
     sqrt(sum((a - b) ^ 2));
 }
 
-kmeans <- function(data, groupcount)
+kmeans <- function(data, groupcount, dist = euclid)
 {
     # convergence threshold -> what is the maximal number of items that can be moved between clusters, so that kmeans can stop now
     convTh <- 2
