@@ -5,6 +5,7 @@ library(datasets)
 library(tidyverse)
 library(microbenchmark)
 library(ggplot2)
+library(fossil)
 
 options(device = "png")
 par()
@@ -17,6 +18,9 @@ colnames(iris)
 
 data.noLabels = na.omit(iris %>% select(1 : 4))
 print(kmeans(data.noLabels[c(1 : 10),], 3))
+
+kmeans.res = kmeans(data.noLabels, 3);
+rand.index(as.numeric(iris$Species), kmeans.res$clusterId)
 print(hac(data.noLabels[c(1 : 10),]))
 
 hacBenchmark <- microbenchmark(
