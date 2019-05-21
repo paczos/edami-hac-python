@@ -1,8 +1,10 @@
-dist <- function(a, b){
+euclid <- function(a, b){
     sqrt(sum((a - b) ^ 2));
 }
+# rand index, adjusted rand index, jaccard index, silueette coeficient
+# different dist functions
 
-hac <- function (data)
+hac <- function (data, groupcount, dist=euclid)
 {
     # initially: treating each point as a separate cluster
     # using centroids to assess distances between clusters
@@ -10,15 +12,14 @@ hac <- function (data)
     colsWithDataCount <- ncol(data);
     ids <- as.integer(rownames(data));
     data$id <- ids;
+
     data$size <- 1;
 
     clusterCandidates <- data;
+    data$clusterId <- ids;
 
-    clusters <- data.frame(data = integer(), cluster = integer());
+    while (length(unique(data$clusterId)) > groupcount) {
 
-    while (nrow(clusterCandidates) > 1) {
-
-        # find closest pair
         s <- combn(1 : nrow(clusterCandidates), 2, function(pair){
             fst = pair[1];
             snd = pair[2];
@@ -40,7 +41,11 @@ hac <- function (data)
         sndClusterSize = snd$size;
 
         centroidData <- (fstData * fstClusterSize + sndData * sndClusterSize) / (fstClusterSize + sndClusterSize);
+
         centroidId <- min(fst$id, snd$id);
+        data[data$clusterId == fst$id, "clusterId"] = centroidId;
+        data[data$clusterId == snd$id, "clusterId"] = centroidId;
+
         centroidData$id <- centroidId;
         centroidData$size <- fstClusterSize + sndClusterSize;
 
@@ -49,12 +54,7 @@ hac <- function (data)
 
         # remove merged  clusters from clusterCandidates
         clusterCandidates <- clusterCandidates[- c(fstIdx, sndIdx),];
-
-        newClusterId <- floor(nrow(clusters) / 2) + 1;
-
-        clusters <- rbind(clusters, list(data = fst$id, cluster = newClusterId));
-        clusters <- rbind(clusters, list(data = snd$id, cluster = newClusterId));
     }
-
-    clusters
+    data$size <- NULL
+    data
 }
