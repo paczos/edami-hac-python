@@ -6,6 +6,7 @@ library(tidyverse)
 library(microbenchmark)
 library(ggplot2)
 library(fossil)
+library(clusterCrit)
 
 options(device = "png")
 par()
@@ -24,35 +25,62 @@ dbgdata.noLabels = dbgdata %>% select(1 : 2);
 
 dbgdata.kmeans = kmeans(dbgdata.noLabels, 2)
 print(dbgdata.kmeans)
-print(paste("rand index kmeans debug data", rand.index(dbgdata.cluster, dbgdata.kmeans$clusterId)))
+print(extCriteria(as.integer(dbgdata.cluster), dbgdata.kmeans$clusterId, c("Rand", "Folkes")))
+
 
 dbgdata.hac = hac(dbgdata.noLabels, 2)
 print(dbgdata.hac)
-print(paste("rand index hac debug data", rand.index(dbgdata.cluster, dbgdata.hac$clusterId)))
+
+print(extCriteria(as.integer(dbgdata.cluster), dbgdata.hac$clusterId, c("Rand", "Folkes")))
 
 
 
+
+#iris ds
 
 colnames(iris)
 data.noLabels = na.omit(iris %>% select(1 : 4))
-print(kmeans(data.noLabels[c(1 : 10),], 3))
+res.kmeans3 = kmeans(data.noLabels[c(1 : 10),], 3)
+print(res.kmeans3)
+print(extCriteria(as.integer(iris[c(1 : 10),]$Species), res.kmeans3$clusterId, c("Rand", "Folkes")))
+
 
 kmeans.res = kmeans(data.noLabels, 3);
-rand.index(as.numeric(iris$Species), kmeans.res$clusterId)
+print(extCriteria(as.integer(iris$Species), kmeans.res$clusterId, c("Rand", "Folkes")))
+
 
 hac.res = hac(data.noLabels[c(1 : 10),], 3);
 rand.index(as.numeric(iris[c(1 : 10),]$Species), hac.res$clusterId)
+print(extCriteria(as.integer(iris[c(1 : 10),]$Species), kmeans.res$clusterId, c("Rand", "Folkes")))
+
 
 print(hac(data.noLabels[c(1 : 10),], 3))
 
+
+# different dist function
+
+mannhattan = function(a, b){
+    sum(abs(a - b))
+}
+
+
+
+
+
+
+
+
+
+
+
 hacBenchmark <- microbenchmark(
-hac(data.noLabels[c(1 : 10),])
+hac(data.noLabels[c(1 : 10),], 3)
 );
 print(hacBenchmark)
 qplot(y = time, data = hacBenchmark, colour = expr)
 
 hacBenchmarkLarge <- microbenchmark(
-hac(data.noLabels[c(1 : 50),])
+hac(data.noLabels[c(1 : 50),], 3)
 );
 print(hacBenchmarkLarge)
 qplot(y = time, data = hacBenchmarkLarge, colour = expr)
