@@ -14,14 +14,35 @@ dev.off()
 source("kmeans.r")
 source("hac.r")
 
-colnames(iris)
 
+dbgdata.x = c(4,5, 2, 3, 4, 1, 1, 2)
+dbgdata.y = c(5,5, 4, 3, 4, 1, 2, 1)
+dbgdata.cluster = c(1,1, 1, 1, 1, 2, 2, 2)
+
+dbgdata = data.frame(dbgdata.x, dbgdata.y, dbgdata.cluster)
+dbgdata.noLabels = dbgdata %>% select(1 : 2);
+
+dbgdata.kmeans = kmeans(dbgdata.noLabels, 2)
+print(dbgdata.kmeans)
+print(paste("rand index debug data", rand.index(dbgdata.cluster, dbgdata.kmeans$clusterId)))
+
+dbgdata.hac = hac(dbgdata.noLabels, 2)
+print(dbgdata.hac)
+
+
+
+
+colnames(iris)
 data.noLabels = na.omit(iris %>% select(1 : 4))
 print(kmeans(data.noLabels[c(1 : 10),], 3))
 
 kmeans.res = kmeans(data.noLabels, 3);
 rand.index(as.numeric(iris$Species), kmeans.res$clusterId)
-print(hac(data.noLabels[c(1 : 10),]))
+
+hac.res = hac(data.noLabels[c(1 : 10),], 3);
+rand.index(as.numeric(iris[c(1 : 10),]$Species), hac.res$clusterId)
+
+print(hac(data.noLabels[c(1 : 10),], 3))
 
 hacBenchmark <- microbenchmark(
 hac(data.noLabels[c(1 : 10),])
