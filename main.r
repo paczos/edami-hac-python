@@ -15,19 +15,20 @@ source("kmeans.r")
 source("hac.r")
 
 
-dbgdata.x = c(4,5, 2, 3, 4, 1, 1, 2)
-dbgdata.y = c(5,5, 4, 3, 4, 1, 2, 1)
-dbgdata.cluster = c(1,1, 1, 1, 1, 2, 2, 2)
+dbgdata.x = c(4, 5, 2, 3, 4, 1, 1, 2)
+dbgdata.y = c(5, 5, 4, 3, 4, 1, 2, 1)
+dbgdata.cluster = c(1, 1, 1, 1, 1, 2, 2, 2)
 
 dbgdata = data.frame(dbgdata.x, dbgdata.y, dbgdata.cluster)
 dbgdata.noLabels = dbgdata %>% select(1 : 2);
 
 dbgdata.kmeans = kmeans(dbgdata.noLabels, 2)
 print(dbgdata.kmeans)
-print(paste("rand index debug data", rand.index(dbgdata.cluster, dbgdata.kmeans$clusterId)))
+print(paste("rand index kmeans debug data", rand.index(dbgdata.cluster, dbgdata.kmeans$clusterId)))
 
 dbgdata.hac = hac(dbgdata.noLabels, 2)
 print(dbgdata.hac)
+print(paste("rand index hac debug data", rand.index(dbgdata.cluster, dbgdata.hac$clusterId)))
 
 
 
