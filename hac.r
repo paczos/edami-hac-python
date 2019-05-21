@@ -1,6 +1,3 @@
-euclid <- function(a, b){
-    sqrt(sum((a - b) ^ 2));
-}
 # rand index, adjusted rand index, jaccard index, silueette coeficient
 # different dist functions
 

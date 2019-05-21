@@ -154,6 +154,80 @@ The algorithm was ran 100 times using two different sizes of input data frame. I
 
 # Comparison and summary
 
+## Clustering quality evaluation for different distance functions
+ When one has labelled data, they can mark how accurately clustering was performed. 
+Evaluation was performed on two datasets: the first one was very simple and checked whether implementations are correct, the second one was iris dataset. 
+Two indexes were calculated for each clustering. For the first datasets, both algorithms were 100% correct. 
+
+10 - element ds (kmeans):
+
+```$rand
+[1] 0.3555556
+
+$folkes_mallows
+[1] 0.5962848
+```
+
+full iris ds (kmeans):
+
+```
+$rand
+[1] 0.873736
+
+$folkes_mallows
+[1] 0.8112428
+```
+
+10-element ds (hac):
+```
+[1] 0.4
+
+$folkes_mallows
+[1] 0.6324555
+
+```
+words better than kmeans for this ds
+
+### Manhattan distance 
+
+10 - element ds kmeans:
+
+```
+$rand
+[1] 0.3111111
+
+$folkes_mallows
+[1] 0.5577734
+
+```
+Similar to Euclid
+
+Full iris ds (kmeans)
+```
+$rand
+[1] 0.8679194
+
+$folkes_mallows
+[1] 0.8031907
+
+```
+This time it was a little bit worse.
+
+10-element ds hac:
+``` 
+$rand
+[1] 0.1555556
+
+$folkes_mallows
+[1] 0.3944053
+```
+Manhattan distance for this ds performs very poorly.
+
+
+This shows that clustering data when there are very few samples can be very inaccurate due to small differences between. Euclidean distance should be more sensitive to outliers in data as opposed to the Manhattan. We have very few dimensions, so the differences between two distance methods are very similar. HAC was, however, much worse for 10-element ds when Manhattan was used instead of Euclidean. 
+    
+## Observations
+
 Although both K-MEANS and HAC split data into clusters, they have different understanding of the shapes of their results. K-means assigns each data-point to a single cluster, whereas HAC creates hierarchy of nested sets. 
 
 Simple randomized heuristic (randomized placement of centroids and testing convergence by counting how many points moved between clusters) allowed for implementation of k-means that finds reasonably good clustering quickly.
@@ -163,3 +237,4 @@ That was not the case with HAC. In spite of outputting correct and complete resu
 Which of these two algorithms one should choose depends on the task being solved. When one needs a flat partition of data-points into groups that are similar, then k-means is the way to go. On the other hand, if one is interested in finding structure in the data, then HAC should be used.     
 
 This project allowed me to get familiar with limitations of R language and to get used to the tabular way of thinking about data in this language. 
+
