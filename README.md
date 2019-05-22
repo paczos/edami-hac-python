@@ -225,6 +225,8 @@ Manhattan distance for this ds performs very poorly.
 
 
 This shows that clustering data when there are very few samples can be very inaccurate due to small differences between data-points. Euclidean distance should be more sensitive to outliers in data as opposed to the Manhattan. We have very few dimensions, so the differences between two distance methods are very small. HAC was, however, much worse for 10-element ds when Manhattan was used instead of Euclidean. 
+
+Kmeans uses randomized starting point so it is fragile to finding local minimum whereas this implementation of HAC calculates the best distance without any shortcuts. 
     
 ## Observations
 
