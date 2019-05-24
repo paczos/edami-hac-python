@@ -7,6 +7,7 @@ library(microbenchmark)
 library(ggplot2)
 library(fossil)
 library(clusterCrit)
+library(cluster)
 
 options(device = "png")
 par()
@@ -30,12 +31,18 @@ dbgdata.kmeans = kmeans(dbgdata.noLabels, 2, euclid)
 print(dbgdata.kmeans)
 print(extCriteria(as.integer(dbgdata.cluster), dbgdata.kmeans$clusterId, c("Rand", "Folkes")))
 
+distM <- dist(dbgdata)
+plot(silhouette(dbgdata.kmeans$clusterId, distM))
+
+
+
 
 dbgdata.hac = hac(dbgdata.noLabels, 2, euclid)
 print(dbgdata.hac)
 
 print(extCriteria(as.integer(dbgdata.cluster), dbgdata.hac$clusterId, c("Rand", "Folkes")))
-
+distM <- dist(dbgdata)
+plot(silhouette(dbgdata.hac$clusterId, distM))
 
 
 
@@ -43,22 +50,29 @@ print(extCriteria(as.integer(dbgdata.cluster), dbgdata.hac$clusterId, c("Rand", 
 
 colnames(iris)
 data.noLabels = na.omit(iris %>% select(1 : 4))
-res.kmeans3 = kmeans(data.noLabels[c(1 : 10),], 3, euclid)
-print(res.kmeans3)
-print(extCriteria(as.integer(iris[c(1 : 10),]$Species), res.kmeans3$clusterId, c("Rand", "Folkes")))
+res.kmeans3 = kmeans(data.noLabels[c(1 : 50),], 3, euclid)
 
+
+print(res.kmeans3)
+print(extCriteria(as.integer(iris[c(1 : 50),]$Species), res.kmeans3$clusterId, c("Rand", "Folkes")))
+distM <- dist(iris[c(1 : 50),])
+plot(silhouette(res.kmeans3$clusterId, distM))
 
 kmeans.res = kmeans(data.noLabels, 3, euclid);
 print(extCriteria(as.integer(iris$Species), kmeans.res$clusterId, c("Rand", "Folkes")))
+distM <- dist(data.noLabels)
+plot(silhouette(kmeans.res$clusterId, distM))
 
+hac.res = hac(data.noLabels[c(1 : 50),], 3, euclid);
+rand.index(as.numeric(iris[c(1 : 50),]$Species), hac.res$clusterId)
+print(extCriteria(as.integer(iris[c(1 : 50),]$Species), hac.res$clusterId, c("Rand", "Folkes")))
+distM <- dist(data.noLabels[c(1 : 50),])
+plot(silhouette(hac.res$clusterId, distM))
 
-hac.res = hac(data.noLabels[c(1 : 10),], 3, euclid);
-rand.index(as.numeric(iris[c(1 : 10),]$Species), hac.res$clusterId)
-print(extCriteria(as.integer(iris[c(1 : 10),]$Species), kmeans.res$clusterId, c("Rand", "Folkes")))
 
 
 print(hac(data.noLabels[c(1 : 10),], 3))
-print(extCriteria(as.integer(iris[c(1 : 10),]$Species), hac(data.noLabels[c(1 : 10),], 3)$clusterId, c("Rand", "Folkes")))
+print(extCriteria(as.integer(iris[c(1 : 100),]$Species), hac(data.noLabels[c(1 : 10),], 3)$clusterId, c("Rand", "Folkes")))
 
 # different dist function
 print("mannhattan")
