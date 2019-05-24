@@ -232,15 +232,19 @@ Kmeans uses randomized starting point so it is fragile to finding local minimum 
 ### Silohuette plots 
 
 hac dbgdata
+
 ![hac dbgdata](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/silhouette_hac_dbgdata.png)
 
 hac iris
+
 ![hac iris](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/silhouette_hac_iris.png)
 
 kmeans dbgdata
+
 ![kmeans dbgdata](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/silhouette_kmeans_dbgdata.png)
 
 kmeans iris
+
 ![kmeans iris](https://gitlab.com/paczos/edami-hac-k-means-impl-and-comp/raw/master/silhouette_kmeans_iris.png)
 
 
