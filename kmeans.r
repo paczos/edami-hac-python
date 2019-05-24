@@ -1,7 +1,7 @@
 library(tidyverse)
 
 
-kmeans <- function(data, groupcount, dist)
+kmeans <- function(data, groupcount, distance)
 {
     # convergence threshold -> what is the maximal number of items that can be moved between clusters, so that kmeans can stop now
     convTh <- 2
@@ -17,7 +17,7 @@ kmeans <- function(data, groupcount, dist)
         for (i in 1 : nrow(data)) {
             row <- data[i,];
             distances <- apply(centroids, 1, function(c){
-                dist(c, row);
+                distance(c, row);
             })
 
             # store closest centroid
