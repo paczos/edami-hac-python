@@ -161,7 +161,8 @@ Two indexes were calculated for each clustering. For the first datasets, both al
 
 10 - element ds (kmeans):
 
-```$rand
+```
+$rand
 [1] 0.3555556
 
 $folkes_mallows
